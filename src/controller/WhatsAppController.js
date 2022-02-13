@@ -27,17 +27,20 @@ class WhatsAppController {
         Element.prototype.hide = function() {
 
             this.style.display = 'none';
+            return this
         }
 
         Element.prototype.show = function() {
 
             this.style.display = 'block';
+            return this
+
         }
 
         Element.prototype.toggle = function() {
 
             this.style.display = (this.style.display === 'none') ? 'block' : 'none'
-            
+            return this  
         }
 
         Element.prototype.on = function(events, fn) {
@@ -56,8 +59,34 @@ class WhatsAppController {
                 this.style[name] = styles[name]
 
            }
+           return this
             
         }
+
+        Element.prototype.addClass = function(name) {
+
+           this.classList.add(name)
+             
+        }
+
+        Element.prototype.removeClass = function(name) {
+
+            this.classList.remove(name)
+              
+        }
+ 
+        Element.prototype.toggleClass = function(name) {
+
+            this.classList.toggle(name)
+              
+        }
+
+        Element.prototype.hasClass = function(name) {
+
+            return this.classList.contains(name)
+              
+        }
+
 
 
 
