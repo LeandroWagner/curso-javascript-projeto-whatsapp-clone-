@@ -3,12 +3,16 @@ class WhatsAppController {
     constructor() {
         console.log('WhatsAppController OK')
 
+        //carrega os eventos
+        this.initEvents()
+
         //prototype
         this.elementsPrototype()
 
         //carrega os elementos
         this.loadElements()
 
+        
     }
 
     loadElements() {
@@ -92,4 +96,44 @@ class WhatsAppController {
 
     }
 
+    initEvents() {
+       
+        this.el.myPhoto.on('click', e=>{
+            this.closeAllLeftPanel()
+            this.el.panelEditProfile.show()
+            setTimeout(()=>{
+                this.el.panelEditProfile.addClass('open')
+            }, 300)
+           
+           
+        });
+
+        //abre profile
+        this.el.btnNewContact.on('click', e=>{
+            this.closeAllLeftPanel()
+            this.el.panelAddContact.show()
+          
+
+        });
+
+        //fecha profile
+        this.el.btnClosePanelEditProfile.on('click', e=>{
+            this.el.panelEditProfile.removeClass('open')
+
+        });
+
+        this.el.btnClosePanelAddContact.on('click', e=>{
+            this.el.panelPanelAddContact.removeClass('open')
+
+        });
+
+
+       
+    }  
+
+    //Esconde todos os paineis do lado esquerdo.
+    closeAllLeftPanel() {
+        this.el.panelEditProfile.hide()
+        this.el.panelAddContact.hide()
+    }  
 }
