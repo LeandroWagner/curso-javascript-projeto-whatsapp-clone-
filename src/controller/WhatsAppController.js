@@ -2,16 +2,15 @@ class WhatsAppController {
 
     constructor() {
         console.log('WhatsAppController OK')
-
-        //carrega os eventos
-        this.initEvents()
-
+      
         //prototype
         this.elementsPrototype()
 
         //carrega os elementos
         this.loadElements()
 
+          //carrega os eventos
+        this.initEvents()
         
     }
 
@@ -91,6 +90,24 @@ class WhatsAppController {
               
         }
 
+        HTMLFormElement.prototype.getForm = function () {
+            
+            return new FormData(this);
+        }
+
+        HTMLFormElement.prototype.toJSON = function () {
+            
+            let json = {}
+
+            this.getForm().forEach((value, key)=>{
+
+                json[key] = value
+            })
+
+            return json
+        }
+
+    
 
 
 
@@ -127,8 +144,38 @@ class WhatsAppController {
 
         });
 
+        //Evento do click na foto
+        this.el.photoContainerEditProfile.on('click', e=>{
+            this.el.inputProfilePhoto.click()
 
+        });
+
+        //Nome da phot
+        this.el.inputNamePanelEditProfile.on('keypress', e=>{
+            
+            if (e.key === 'Enter') {
+                
+                //cancela o comportamento padrão
+                e.preventDefault()
+                this.el.btnSavePanelProfile.click()
+            }
+
+       });
+
+       this.el.btnSavePanelProfile.on('click', e=>{
+        
+        console.log(this.el.inputNamePanelEditProfile.innerHTML)
        
+       });
+
+       this.el.formPanelAddContact.on('submit', e=>{
+
+            e.preventDefault();
+
+            let formData = new FormData(this.el.formPanelAddContact)
+
+       });
+
     }  
 
     //Esconde todos os paineis do lado esquerdo.
