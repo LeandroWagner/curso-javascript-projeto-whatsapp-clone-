@@ -108,9 +108,6 @@ class WhatsAppController {
         }
 
     
-
-
-
     }
 
     initEvents() {
@@ -176,11 +173,57 @@ class WhatsAppController {
 
        });
 
+        this.el.contactsMessagesList.querySelectorAll('.contact-item').forEach(item=>{
+            item.on('click', e=>{
+                this.el.home.hide()
+                this.el.main.css({
+                    display:'flex'
+
+                })
+            })
+        }) 
+
+        this.el.btnAttach.on('click', e=>{
+
+            e.stopPropagation()
+            this.el.menuAttach.addClass('open')
+            //Bind continua sendo o mesmo escopo
+            document.addEventListener('click', this.closeMenuAttach.bind(this))
+        })
+
+        this.el.btnAttachPhoto.on('click', e=>{
+            this.el.menuAttach.addClass('open')
+
+        })
+
+        this.el.btnAttachCamera.on('click', e=>{
+            this.el.menuAttach.addClass('open')
+
+        })
+
+        this.el.btnAttachDocument.on('click', e=>{
+            this.el.menuAttach.addClass('open')
+
+        })
+
+        this.el.btnAttachContact.on('click', e=>{
+            this.el.menuAttach.addClass('open')
+
+        })
+
+        
     }  
 
     //Esconde todos os paineis do lado esquerdo.
     closeAllLeftPanel() {
         this.el.panelEditProfile.hide()
         this.el.panelAddContact.hide()
-    }  
+    }
+
+    closeMenuAttach(e) {
+        document.removeEventListener('click', this.closeMenuAttach)
+        this.el.menuAttach.addClass('open')
+
+    }   
+  
 }
