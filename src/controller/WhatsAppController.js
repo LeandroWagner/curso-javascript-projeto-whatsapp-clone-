@@ -192,27 +192,92 @@ class WhatsAppController {
         })
 
         this.el.btnAttachPhoto.on('click', e=>{
-            this.el.menuAttach.addClass('open')
+          
+            this.el.inputPhoto.click()
+
+        })
+
+        //executa uma funcao para verificar quais os arquivos anexados
+        this.el.inputPhoto.on('change',e=>{
+
+            //coleção usando sprade (gera um array nas possiçoes certas)
+            [...this.el.inputPhoto.files].forEach(file=>{
+
+                   console.log(file) 
+            })
 
         })
 
         this.el.btnAttachCamera.on('click', e=>{
-            this.el.menuAttach.addClass('open')
+            this.closeAllMainPanel()
+            this.el.panelCamera.addClass('open')
+            this.el.panelCamara.css({
+                'height':'calc(100%-120px)'
+            })
+
+        })
+
+        //veja para tirar a foto
+        this.el.btnClosePanelCamera.on('click', e=>{
+         
+            this.closeAllMainPanel()
+            this.el.panelMessagesContainer.show()
+
+        })
+
+        //tirar a photo
+        this.el.btnTakePicture.on('click', e=>{
+
+            console.log('take picture')
 
         })
 
         this.el.btnAttachDocument.on('click', e=>{
-            this.el.menuAttach.addClass('open')
+            
+            this.closeAllMainPanel()
+            this.el.panelDocumentPreview.addClass('open')
+            this.el.panelDocumentPreview.css({
+                'height':'calc(100%-120px)'
+            })
 
         })
 
         this.el.btnAttachContact.on('click', e=>{
+            
+            this.closeAllMainPanel()
             this.el.menuAttach.addClass('open')
 
         })
 
+        this.btnClosePanelDocumentPreview.on('click', e=>{
+
+            this.closeAllLeftPanel()
+            this.el.panelMessagesContainer.show()
+        })
+
+        this.btnSendDocument.on('click', e=>{
+
+            console.log('Envia documento')
+        })
         
-    }  
+        this.el.btnAttachContact.on('click', e=>{
+
+            this.el.modalContacts.show()
+        })
+
+        this.btnCloseModalContacts.on('click', e=>{
+            
+            this.el.modalContacts.hide()
+        
+        })
+    }   
+
+    closeAllMainPanel() {
+
+        this.el.panelMessagesContainer.hide()
+        this.el.panelDocumentPreview.removeClass('open')
+        this.el.panelCamera.removeClass('open')
+    }
 
     //Esconde todos os paineis do lado esquerdo.
     closeAllLeftPanel() {
