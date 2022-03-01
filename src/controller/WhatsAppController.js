@@ -294,8 +294,11 @@ class WhatsAppController {
     startRecordMicrophoneTime()
     {
         let start = Date.now()
+
+        //formantando o
         this._recordMicrophoneInterval = setInterval(()=>{
-            this.el.recordMicropneTimer.innerHTML =(DataTransfer.now() - start);
+            this.el.recordMicropneTimer.innerHTML = Format.toTime(DataTransfer.now() - start);
+
         },100)
     }
 
